@@ -1,4 +1,6 @@
 # Quests-OG
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSKBotNL%2FQuests-OG.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSKBotNL%2FQuests-OG?ref=badge_shield)
+
 Quests plugin for TrueOG
 
 ## Permissions used
@@ -61,3 +63,7 @@ Free
 - 5 dragon eggs
 - 250 levels
 - 300 Duels wins
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSKBotNL%2FQuests-OG.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSKBotNL%2FQuests-OG?ref=badge_large)
