@@ -2,4 +2,4 @@
 redisUrl: redis://^{KEYDB_PASSWORD}@127.0.0.1:6379/0
 
 # Debug logging. Leave false in production, enable when reproducing a bug.
-debug: true
+debug: false
