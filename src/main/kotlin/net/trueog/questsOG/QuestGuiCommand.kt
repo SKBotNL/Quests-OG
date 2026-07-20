@@ -24,7 +24,7 @@ class QuestGuiCommand : CommandExecutor {
                 if (debug) QuestsOG.plugin.logger.info("/questgui coroutine entered for ${sender.name}")
                 val nextQuest = HomesProgression.getNextQuest(sender)
                 if (debug) QuestsOG.plugin.logger.info("/questgui nextQuest=${nextQuest?.javaClass?.simpleName}")
-                val builder = ProgressMenu.builder(QuestsOG.plugin, sender, "&aHome Quests")
+                val builder = ProgressMenu.builder(QuestsOG.plugin, sender, "&5Home Quests")
 
                 HomesProgression.quests.forEach { quest ->
                     builder.section(questName(quest), stateFor(quest, nextQuest))
