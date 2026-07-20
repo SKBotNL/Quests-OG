@@ -1,5 +1,6 @@
 /* This is free and unencumbered software released into the public domain */
 
+import com.github.jengelman.gradle.plugins.shadow.internal.RelocationUtil
 import java.io.BufferedReader
 import org.gradle.kotlin.dsl.provideDelegate
 
@@ -72,8 +73,10 @@ repositories {
 dependencies {
     compileOnly("org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT") // Declare Purpur API version to be packaged.
     compileOnly("net.luckperms:api:5.5") // Import the LuckPerms API.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib") // Import Kotlin standard library.
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2") // Import Kotlin async library.
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib") // Provided by DiamondBank-OG's shaded Kotlin runtime.
+    compileOnly(
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
+    ) // Provided by DiamondBank-OG's shaded coroutine runtime.
     implementation("io.lettuce:lettuce-core:7.2.0.RELEASE") // Import Lettuce API for keydb.
     implementation("org.slf4j:slf4j-nop:2.0.17") // Provide SLF4J NOP provider to suppress missing-provider warning.
     implementation("org.slf4j:slf4j-api:2.0.17") // Bundle a relocated SLF4J API for shaded dependencies.
@@ -83,7 +86,12 @@ dependencies {
     compileOnlyApi(project(":libs:DiamondBank-OG")) {
         attributes { attribute(kotlinAttribute, true) }
     } // Import TrueOG network DiamondBank-OG Kotlin API (from source).
-    implementation(project(":libs:GxUI-OG")) // Shade TrueOG Network GxUI-OG advancement menu API into this plugin.
+    implementation(project(":libs:GxUI-OG")) // Shade TrueOG Network GxUI-OG progress menu API into this plugin.
+}
+
+configurations.runtimeClasspath {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "org.jetbrains.kotlinx")
 }
 
 /* ---------------------- Reproducible jars ---------------------------- */
@@ -95,8 +103,11 @@ tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible .ja
 /* ----------------------------- Shadow -------------------------------- */
 tasks.shadowJar {
     archiveClassifier.set("") // Use empty string instead of null.
-    isEnableRelocation = true
+    isEnableRelocation = false
     relocationPrefix = "${project.group}.shadow"
+    relocate("kotlin", "net.trueog.diamondbankog.shadow.kotlin")
+    relocate("kotlinx", "net.trueog.diamondbankog.shadow.kotlinx")
+    doFirst { RelocationUtil.configureRelocation(this@shadowJar, relocationPrefix) }
     mergeServiceFiles()
     minimize { exclude(dependency("org.slf4j:slf4j-nop:.*")) }
 }

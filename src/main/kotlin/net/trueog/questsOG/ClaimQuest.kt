@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class ClaimQuest : CommandExecutor {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val debug = QuestsOG.config.debug
         if (debug) QuestsOG.plugin.logger.info("/claimquest invoked by ${sender.name}")
         if (sender !is Player) {

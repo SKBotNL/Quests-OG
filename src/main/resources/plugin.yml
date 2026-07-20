@@ -11,5 +11,5 @@ commands:
     description: Claims a quest, duh
     usage: /claimquest
   questgui:
-    description: Open the homes quest menu. Optional page argument (e.g. /questgui 2).
-    usage: /questgui [page]
+    description: Open the layered homes quest menu.
+    usage: /questgui
