@@ -10,3 +10,6 @@ commands:
   claimquest:
     description: Claims a quest, duh
     usage: /claimquest
+  questgui:
+    description: Open the layered homes quest menu.
+    usage: /questgui

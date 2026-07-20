@@ -36,8 +36,8 @@ Free
 ### Five homes
 - 2500 diamonds
 - 15 days played
-- 5000k blocks travelled on pig
-- 1000k blocks travelled on strider
+- 5000 blocks travelled on pig
+- 1000 blocks travelled on strider
 - Kill 50 dolphins
 - Kill 50 zoglins
 - The Cutest Predator advancement
@@ -53,8 +53,8 @@ Free
 ### Six Homes
 - 5000 diamonds
 - 30 days played
-- 10000k blocks walked on water
-- 10000k blocks walked underwater
+- 10000 blocks walked on water
+- 10000 blocks walked underwater
 - All 13 music discs
 - All advancements
 - 1500 blocks of obsidian mined

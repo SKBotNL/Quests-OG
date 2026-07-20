@@ -123,9 +123,7 @@ class HomesSix : Quest {
                 "Home six quest claimed by ${player.name} (${player.uniqueId})",
                 "Quests-OG /claimquest",
             )
-        if (withdrawResult.isFailure) {
-            return false
-        }
+        if (withdrawResult.isFailure) return false
 
         return runOnMainThread {
             player.level -= 250
@@ -164,12 +162,12 @@ class HomesSix : Quest {
 
         return arrayOf(
             ProgressRequirement("Total Shards", requirements.totalShards, 5000L * 9),
-            ProgressRequirement("Ticks Played", (requirements.ticksPlayed).toLong(), (51840000).toLong()),
-            ProgressRequirement("Cm Walked on Water", (requirements.walkOnWaterOneCm).toLong(), (1000000).toLong()),
+            ProgressRequirement("Days Played", (requirements.ticksPlayed / 1_728_000).toLong(), 30L),
+            ProgressRequirement("Blocks Walked on Water", (requirements.walkOnWaterOneCm / 100).toLong(), 10_000L),
             ProgressRequirement(
-                "Cm Walked under Water",
-                (requirements.walkUnderWaterOneCm).toLong(),
-                (1000000).toLong(),
+                "Blocks Walked Under Water",
+                (requirements.walkUnderWaterOneCm / 100).toLong(),
+                10_000L,
             ),
             ProgressRequirement("Music Discs", (requirements.discs).toLong(), (13).toLong()),
             ProgressRequirement("Finished Advancements", (requirements.finishedAdvancements).toLong(), (1179).toLong()),

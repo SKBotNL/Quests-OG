@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class QuestsOG : JavaPlugin() {
     companion object {
-        val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+        lateinit var scope: CoroutineScope
 
         lateinit var plugin: QuestsOG
         lateinit var config: Config
@@ -32,6 +32,11 @@ class QuestsOG : JavaPlugin() {
 
     override fun onEnable() {
         plugin = this
+        val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            logger.severe("Uncaught coroutine exception: ${throwable.message}")
+            if (Companion.config.debug) throwable.printStackTrace()
+        }
+        scope = CoroutineScope(Dispatchers.Default + SupervisorJob() + exceptionHandler)
 
         Companion.config =
             Config.create()
@@ -81,6 +86,7 @@ class QuestsOG : JavaPlugin() {
 
         this.server.pluginManager.registerEvents(Events(), this)
         getCommand("claimquest")?.setExecutor(ClaimQuest())
+        getCommand("questgui")?.setExecutor(QuestGuiCommand())
     }
 
     override fun onDisable() {

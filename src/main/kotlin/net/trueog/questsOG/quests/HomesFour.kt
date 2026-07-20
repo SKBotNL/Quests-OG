@@ -114,9 +114,7 @@ class HomesFour : Quest {
                 "Home four quest claimed by ${player.name} (${player.uniqueId})",
                 "Quests-OG /claimquest",
             )
-        if (withdrawResult.isFailure) {
-            return false
-        }
+        if (withdrawResult.isFailure) return false
 
         runOnMainThread { player.level -= 150 }
 
@@ -142,8 +140,8 @@ class HomesFour : Quest {
 
         return arrayOf(
             ProgressRequirement("Total Shards", requirements.totalShards, 1000L * 9),
-            ProgressRequirement("Ticks Played", (requirements.ticksPlayed).toLong(), (17280000).toLong()),
-            ProgressRequirement("Total Cm Travelled", (requirements.totalCm).toLong(), (20000000).toLong()),
+            ProgressRequirement("Days Played", (requirements.ticksPlayed / 1_728_000).toLong(), 10L),
+            ProgressRequirement("Blocks Travelled", (requirements.totalCm / 100).toLong(), 200_000L),
             BooleanRequirement("A Furious Cocktail", requirements.hasFuriousCocktail),
             BooleanRequirement("Serious Dedication", requirements.hasSeriousDedication),
             ProgressRequirement("Levels", (requirements.levels).toLong(), (150).toLong()),

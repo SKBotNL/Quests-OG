@@ -19,4 +19,6 @@ object HomesProgression : Progression {
 
         return quests[nextQuestIndex]
     }
+
+    fun getHomeCount(quest: Quest): Int = quests.indexOf(quest) + 2
 }

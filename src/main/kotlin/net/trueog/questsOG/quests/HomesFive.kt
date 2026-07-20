@@ -145,9 +145,7 @@ class HomesFive : Quest {
                 "Home five quest claimed by ${player.name} (${player.uniqueId})",
                 "Quests-OG /claimquest",
             )
-        if (withdrawResult.isFailure) {
-            return false
-        }
+        if (withdrawResult.isFailure) return false
 
         runOnMainThread { player.level -= 200 }
 
@@ -173,9 +171,9 @@ class HomesFive : Quest {
 
         return arrayOf(
             ProgressRequirement("Total Shards", requirements.totalShards, 2500L * 9),
-            ProgressRequirement("Ticks Played", (requirements.ticksPlayed).toLong(), (25920000).toLong()),
-            ProgressRequirement("Cm Travelled on Pig", (requirements.pigOneCm).toLong(), (500000).toLong()),
-            ProgressRequirement("Cm Travelled on Strider", (requirements.striderOneCm).toLong(), (100000).toLong()),
+            ProgressRequirement("Days Played", (requirements.ticksPlayed / 1_728_000).toLong(), 15L),
+            ProgressRequirement("Blocks Travelled on Pig", (requirements.pigOneCm / 100).toLong(), 5_000L),
+            ProgressRequirement("Blocks Travelled on Strider", (requirements.striderOneCm / 100).toLong(), 1_000L),
             ProgressRequirement("Dolphins Killed", (requirements.dolphinKills).toLong(), (50).toLong()),
             ProgressRequirement("Zoglins Killed", (requirements.zoglinKills).toLong(), (50).toLong()),
             BooleanRequirement("The Cutest Predator", requirements.hasCutestPredator),

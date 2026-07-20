@@ -77,7 +77,7 @@ class HomesThree : Quest {
 
         return requirements.totalShards >= 250L * 9 &&
             requirements.ticksPlayed / 20.0 / 60.0 / 60.0 / 24.0 >= 5 &&
-            requirements.totalCm / 100.0 >= 50000 && // 100k?
+            requirements.totalCm / 100.0 >= 50000 &&
             requirements.hasBeaconator &&
             requirements.levels >= 100 &&
             requirements.duelsWins >= 20
@@ -92,9 +92,7 @@ class HomesThree : Quest {
                 "Home three quest claimed by ${player.name} (${player.uniqueId})",
                 "Quests-OG /claimquest",
             )
-        if (withdrawResult.isFailure) {
-            return false
-        }
+        if (withdrawResult.isFailure) return false
 
         runOnMainThread { player.level -= 100 }
 
@@ -120,8 +118,8 @@ class HomesThree : Quest {
 
         return arrayOf(
             ProgressRequirement("Total Shards", requirements.totalShards, 250L * 9),
-            ProgressRequirement("Ticks Played", (requirements.ticksPlayed).toLong(), (8640000).toLong()),
-            ProgressRequirement("Total Cm Travelled", (requirements.totalCm).toLong(), (5000000).toLong()),
+            ProgressRequirement("Days Played", (requirements.ticksPlayed / 1_728_000).toLong(), 5L),
+            ProgressRequirement("Blocks Travelled", (requirements.totalCm / 100).toLong(), 50_000L),
             BooleanRequirement("Beaconator", requirements.hasBeaconator),
             ProgressRequirement("Levels", (requirements.levels).toLong(), (100).toLong()),
             ProgressRequirement("Duels Wins", (requirements.duelsWins).toLong(), (20).toLong()),

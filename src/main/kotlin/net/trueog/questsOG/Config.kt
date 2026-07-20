@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 
 class Config private constructor() {
     lateinit var redisUrl: String
+    var debug: Boolean = false
 
     companion object {
         fun create(): Config? {
@@ -21,6 +22,8 @@ class Config private constructor() {
                 QuestsOG.plugin.logger.severe("Failed to parse config option \"redisUrl\" as a string")
                 return null
             }
+
+            config.debug = yamlConfig.getBoolean("debug", false)
 
             return config
         }
