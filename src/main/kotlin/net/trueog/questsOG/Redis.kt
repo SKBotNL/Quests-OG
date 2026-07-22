@@ -4,7 +4,13 @@ import io.lettuce.core.RedisClient
 import io.lettuce.core.RedisConnectionException
 
 class Redis {
-    private val redisClient: RedisClient = RedisClient.create(QuestsOG.config.redisUrl)
+    private val redisClient: RedisClient =
+        RedisClient.create(QuestsOG.config.redisUrl).apply {
+            options =
+                io.lettuce.core.ClientOptions.builder()
+                    .maintNotificationsConfig(io.lettuce.core.MaintNotificationsConfig.disabled())
+                    .build()
+        }
 
     /** @return True if successful */
     fun testConnection(): Boolean {
