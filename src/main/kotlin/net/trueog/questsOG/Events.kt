@@ -8,7 +8,7 @@ import org.bukkit.event.entity.PlayerDeathEvent
 class Events : Listener {
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) {
-        val translatableDeathMessage = event.deathMessage() as TranslatableComponent
+        val translatableDeathMessage = event.deathMessage() as? TranslatableComponent ?: return
 
         if (translatableDeathMessage.key() == "death.fell.accident.water") {
             QuestsOG.redis.setValue("questsog:${event.player.uniqueId}:deaths:fellAccidentWater", "true")
